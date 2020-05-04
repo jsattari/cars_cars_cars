@@ -2,8 +2,7 @@ dependencies:
   - bokeh
   - pandas
   - numpy
-  - jupyterhub
-  - nbconvert
+  - tornado<6
   - pip
   - pip:
     - jupyter-server-proxy
