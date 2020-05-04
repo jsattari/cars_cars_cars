@@ -2,12 +2,14 @@ from os.path import join, dirname
 import pandas as pd
 from bokeh.io import curdoc
 from bokeh.layouts import row, column
-from bokeh.models import ColumnDataSource, Select, Slider, HoverTool, SingleIntervalTicker, NumeralTickFormatter
+from bokeh.models import (
+    ColumnDataSource, Select, Slider, HoverTool, SingleIntervalTicker,
+    NumeralTickFormatter, Label)
 from bokeh.plotting import figure
 
+
+
 # function that filters data
-
-
 def get_dataset(src, name):
     df = src[src.year == name].copy()
     return ColumnDataSource(data=df)
@@ -27,7 +29,7 @@ def create_figure(src):
     p.yaxis.axis_label = y_title
     p.xaxis.formatter.use_scientific = False
     p.yaxis.formatter.use_scientific = False
-    p.xaxis.formatter = NumeralTickFormatter(format=('0'))
+    p.xaxis.formatter = NumeralTickFormatter(format=('0,000'))
     p.yaxis.formatter = NumeralTickFormatter(format=('$0,000.00'))
     p.background_fill_color = "black"
     p.background_fill_alpha = 0.2
@@ -40,6 +42,8 @@ def create_figure(src):
     p.yaxis.ticker = SingleIntervalTicker(interval=10000)
     p.circle(x='mileage', y='price', size=5,
              color="red", alpha=0.8, source=src)
+    label = Label(x=900000, y=90000, text=str(src.data['year'][0]), text_font_size='40px', text_color='#000000')
+    p.add_layout(label)
     return p
 
 
@@ -48,6 +52,13 @@ def update_plot(attrname, old, new):
     year = year_select.value
     src = get_dataset(df, year)
     source.data.update(src.data)
+
+
+""" def update_label(attrname, old, new):
+    year = year_select.value
+    label = Label(x=900000, y=90000, text=str(year), text_font_size='40px', text_color='#000000')
+    return label """
+
 
 
 # import data
