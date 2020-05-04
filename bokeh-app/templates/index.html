@@ -1,0 +1,34 @@
+{% extends base %}
+
+{% block title %}Bokeh Practice Glyph{% endblock %}
+
+{% block postamble %}
+  <style>
+    {% include 'styles.css' %}
+  </style>
+{% endblock %}
+
+{% block contents %}
+  <div class="content">
+    <h1>This is just some fun Lorem Ipsum</h1>
+
+    <p>This text is brought to you by <a href="https://slipsum.com/">
+    Samuel L. Ipsum</a> <!-- start slipsum code -->
+
+    Now that we know who you are, I know who I am.
+    I'm not a mistake! It all makes sense! In a comic,
+    you know how you can tell who the arch-villain's going to be?
+    He's the exact opposite of the hero. And most times they're friends, like you and me!
+    I should've known way back when... You know why, David? Because of the kids. They called me Mr Glass.
+    
+    <!-- end slipsum code --></p>
+
+    {{ super() }}
+
+    <p>In case it sounded familiar....</p>
+
+    <div class="videoWrapper">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/Tmzbosye2-Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+{% endblock %}

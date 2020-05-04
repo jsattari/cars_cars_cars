@@ -8,7 +8,6 @@ from bokeh.models import (
 from bokeh.plotting import figure
 
 
-
 # function that filters data
 def get_dataset(src, name):
     df = src[src.year == name].copy()
@@ -21,7 +20,7 @@ def create_figure(src):
     y_title = 'Price (dollars)'
     p = figure(
         x_range=(0, 1100000), y_range=(0, 100000),
-        plot_height=600, plot_width=800, tools='pan,box_zoom,reset',
+        plot_height=600, plot_width=800, tools='pan,box_zoom,reset,save',
         title='Car Resale Values by Year', title_location='above')
     p.title.text_font_size = '25px'
     p.title.text_color = 'black'
@@ -32,7 +31,7 @@ def create_figure(src):
     p.xaxis.formatter = NumeralTickFormatter(format=('0,000'))
     p.yaxis.formatter = NumeralTickFormatter(format=('$0,000.00'))
     p.background_fill_color = "black"
-    p.background_fill_alpha = 0.2
+    p.background_fill_alpha = 0.05
     p.xgrid.grid_line_color = None
     p.ygrid.grid_line_color = None
     p.outline_line_width = 2
@@ -42,23 +41,15 @@ def create_figure(src):
     p.yaxis.ticker = SingleIntervalTicker(interval=10000)
     p.circle(x='mileage', y='price', size=5,
              color="red", alpha=0.8, source=src)
-    label = Label(x=900000, y=90000, text=str(src.data['year'][0]), text_font_size='40px', text_color='#000000')
-    p.add_layout(label)
     return p
 
 
 # function that updates based on slider
 def update_plot(attrname, old, new):
     year = year_select.value
+    label.text = str(year)
     src = get_dataset(df, year)
     source.data.update(src.data)
-
-
-""" def update_label(attrname, old, new):
-    year = year_select.value
-    label = Label(x=900000, y=90000, text=str(year), text_font_size='40px', text_color='#000000')
-    return label """
-
 
 
 # import data
@@ -75,6 +66,13 @@ source = get_dataset(df, year)
 
 # create plot from source
 plot = create_figure(source)
+
+# year label on plot
+label = Label(x=800000, y=80000, text=str(
+    df['year'].min()), text_font_size='70px', text_color='#ff496c')
+
+# adding plot label to glyph
+plot.add_layout(label)
 
 # slider tool, slider update action
 year_select = Slider(

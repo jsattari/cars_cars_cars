@@ -1,0 +1,8 @@
+dependencies:
+  - bokeh
+  - pandas
+  - numpy
+  - pip
+  - pip:
+    - nbserverproxy
+    - jupyter-server-proxy
