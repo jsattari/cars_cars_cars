@@ -71,6 +71,8 @@ def create_linegraph(src):
     return p2
 
 # function that updates based on slider
+
+
 def update_plot(attrname, old, new):
     year = year_select.value
     label.text = str(year)
@@ -110,7 +112,8 @@ label = Label(x=840000, y=80000, text=str(
     df2['year'].min()), text_font_size='60px', text_color='#ff496c')
 
 # dynamic plot title
-title = Title(text='Car Resale Values by Year (Since 2012): ' + brand, align='left')
+title = Title(text='Car Resale Values by Year (Since 2012): ' +
+              brand, align='left')
 
 # adding plot labels to glyph
 plot.add_layout(label)
