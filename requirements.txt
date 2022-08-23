@@ -27,7 +27,7 @@ Mako==1.1.2
 MarkupSafe==1.1.1
 mccabe==0.6.1
 mistune==0.8.4
-nbconvert==5.6.1
+nbconvert==6.5.1
 nbformat==5.0.6
 numpy==1.18.3
 oauthlib==3.1.0
